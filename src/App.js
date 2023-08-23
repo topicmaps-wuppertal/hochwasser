@@ -5,10 +5,17 @@ import { md5FetchText } from "react-cismap/tools/fetching";
 import HeavyRainHazardMap from "@cismet-dev/react-cismap-rainhazardmaps/HeavyRainHazardMap";
 import { getGazDataForTopicIds } from "react-cismap/tools/gazetteerHelper";
 import { md5FetchJSON } from "react-cismap/tools/fetching";
+import GenericModalApplicationMenu from "react-cismap/topicmaps/menu/ModalApplicationMenu";
+import { version as cismapRHMVersion } from "@cismet-dev/react-cismap-rainhazardmaps/meta";
 
 import config from "./config";
+import { getCollabedHelpComponentConfig } from "@cismet-collab/ais-generic-texts";
+import { getApplicationVersion } from "./version";
 
 function App() {
+  const reactCismapRHMVersion = cismapRHMVersion;
+  const version = getApplicationVersion();
+
   const email = "hochwasser@stadt.wuppertal.de";
   const [gazData, setGazData] = useState([]);
   const [hinweisData, setHinweisData] = useState([]);
@@ -98,7 +105,16 @@ function App() {
     >
       <HeavyRainHazardMap
         applicationMenuTooltipString="Anleitung | Hintergrund"
-        appMenu={undefined}
+        appMenu={
+          <GenericModalApplicationMenu
+            {...getCollabedHelpComponentConfig({
+              version,
+              reactCismapRHMVersion,
+
+              email,
+            })}
+          />
+        }
         gazetteerSearchPlaceholder="Stadtteil | Adresse | POI | GEP"
         emailaddress={email}
         initialState={config.initialState}
