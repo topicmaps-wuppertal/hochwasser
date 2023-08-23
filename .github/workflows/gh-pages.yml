@@ -1,0 +1,49 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: create tmp .npmrc
+        env:
+          CI_ACCESS_TOKEN: ${{ secrets.NPM_READ_RAINHAZARDMAPS }}
+        shell: bash
+        run: |
+          echo @cismet-dev:registry=https://npm.pkg.github.com/ > .npmrc
+          echo //npm.pkg.github.com/:_authToken=${CI_ACCESS_TOKEN} >> .npmrc
+          echo registry=https://registry.npmjs.org >> .npmrc
+      - name: Debug .npmrc
+        run: cat .npmrc
+      - name: Install Packages
+        run: yarn install
+      - name: cleanup .npmrc
+        shell: bash
+        run: rm .npmrc
+      - name: prepare 0
+        run: touch .version && touch .githash && yarn run postversion
+      - name: prepare 1 (version stuff)
+        run: VERSION=`cat .version`; sed -i "s/%APPLICATION_VERSION%/$VERSION/" src/version.js
+      - name: prepare 2 (hash stuff)
+        run: HASH=`cat .githash`; sed -i "s/%APPLICATION_HASH%/$HASH/" src/version.js
+      - name: Build page
+        run: yarn run build
+        env:
+          CI: false
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+      - name: show deployed folder
+        run: ls build
