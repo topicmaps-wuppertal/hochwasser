@@ -1514,10 +1514,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cismet-collab/ais-generic-texts@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@cismet-collab/ais-generic-texts/-/ais-generic-texts-1.0.0.tgz#6cab8bd816b19b21f9307fd4a2876ac96550e724"
-  integrity sha512-InzgyxxjaEx9jlArWU4DrzWW8RU6RV7BLBJEZnWNp0AbxQ1DKXXXMvDpLJJ05M9asuvPrinCncxaepnsNsRdhw==
+"@cismet-collab/flooding-wupp-texts@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/@cismet-collab/flooding-wupp-texts/-/flooding-wupp-texts-0.0.1.tgz#18f76acc64d4798b6729f712ec057101f14f7add"
+  integrity sha512-i1Xv1ool7gaepdcuhTlQ1rMH3roVAo8mm5H1ggldc+ceFGHIWtkwULNjQ9OgEMN/4XFdYYNDs8GTTsUTeIg2YQ==
   dependencies:
     "@cismet-collab/rainhazardmaps-base-texts" "^1.0.0"
     "@testing-library/jest-dom" "^5.16.5"

@@ -9,7 +9,7 @@ import GenericModalApplicationMenu from "react-cismap/topicmaps/menu/ModalApplic
 import { version as cismapRHMVersion } from "@cismet-dev/react-cismap-rainhazardmaps/meta";
 
 import config from "./config";
-import { getCollabedHelpComponentConfig } from "@cismet-collab/ais-generic-texts";
+import { getCollabedHelpComponentConfig } from "@cismet-collab/flooding-wupp-texts";
 import { getApplicationVersion } from "./version";
 
 function App() {
